@@ -11,16 +11,8 @@ public class HomeController {
 
     @GetMapping("/")
     public String home (ModelMap model) {
-        model.put("name","Jayan Desilva");
-        model.put("address","12124 Shadow Street");
-        model.put("email","jesusKappiya@gmail.com");
-        model.put("id","100");
+
         return "index";
     }
 
-    @GetMapping("/testing")
-    public String testing (ModelMap model) {
-        model.put("id","100");
-        return "test";
-    }
 }
