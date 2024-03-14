@@ -12,4 +12,12 @@ public class MarsRoverApiResponse {
                 "photos=" + photos +
                 '}';
     }
+
+    public List<MarsPhoto> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<MarsPhoto> photos) {
+        this.photos = photos;
+    }
 }

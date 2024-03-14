@@ -8,7 +8,7 @@ public class MarsRoverAPITest {
     @Test
     public void smallTes() {
         RestTemplate rt = new RestTemplate();
-        String url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+        String url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=2&api_key=DEMO_KEY";
         ResponseEntity<MarsRoverApiResponse> response = rt.getForEntity(url, MarsRoverApiResponse.class);
         System.out.println(response.getBody());
     }
