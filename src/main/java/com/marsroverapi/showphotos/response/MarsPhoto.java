@@ -1,10 +1,35 @@
-package com.marsroverapi.showphotos;
+package com.marsroverapi.showphotos.response;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class MarsPhoto {
     private long id;
     private Integer sol;
     private MarsCamera camera;
+    @JsonProperty("img_src")
     private String imgSrc;
+    @JsonProperty("earth_date")
+    private String earthDate;
+    private MarsRover rover;
+
+    public String getEarthDate() {
+        return earthDate;
+    }
+
+    public void setEarthDate(String earthDate) {
+        this.earthDate = earthDate;
+    }
+
+    public MarsRover getRover() {
+        return rover;
+    }
+
+    public void setRover(MarsRover rover) {
+        this.rover = rover;
+    }
 
     public long getId() {
         return id;
@@ -45,6 +70,8 @@ public class MarsPhoto {
                 ", sol=" + sol +
                 ", camera=" + camera +
                 ", imgSrc='" + imgSrc + '\'' +
+                ", earthDate=" + earthDate +
+                ", rover=" + rover +
                 '}';
     }
 }

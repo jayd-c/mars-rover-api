@@ -1,2 +1,66 @@
-package com.marsroverapi.showphotos.response;public class MarsRover {
+package com.marsroverapi.showphotos.response;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
+
+public class MarsRover {
+    private Long id;
+    private String name;
+    @JsonProperty("landing_date")
+    private String landingDate;
+    @JsonProperty("launch_date")
+    private String launchDate;
+
+//    "name": "Curiosity",
+//            "landing_date": "2012-08-06",
+//            "launch_date": "2011-11-26",
+//            "status": "active",
+//            "max_sol": 4102,
+//            "max_date": "2024-02-19",
+//            "total_photos": 695670,
+//            "cameras": [
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLandingDate() {
+        return landingDate;
+    }
+
+    public void setLandingDate(String landingDate) {
+        this.landingDate = landingDate;
+    }
+
+    public String getLaunchDate() {
+        return launchDate;
+    }
+
+    public void setLaunchDate(String launchDate) {
+        this.launchDate = launchDate;
+    }
+
+    @Override
+    public String toString() {
+        return "MarsRover{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", landingDate='" + landingDate + '\'' +
+                ", launchDate='" + launchDate + '\'' +
+                '}';
+    }
 }

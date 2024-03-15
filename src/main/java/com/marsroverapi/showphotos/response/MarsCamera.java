@@ -1,4 +1,4 @@
-package com.marsroverapi.showphotos;
+package com.marsroverapi.showphotos.response;
 
 public class MarsCamera {
     private Long id;

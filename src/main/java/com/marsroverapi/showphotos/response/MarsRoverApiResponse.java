@@ -1,4 +1,4 @@
-package com.marsroverapi.showphotos;
+package com.marsroverapi.showphotos.response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ public class MarsRoverApiResponse {
 
     @Override
     public String toString() {
+        System.out.println(photos.get(0).getImgSrc());
         return "MarsRoverApiResponse{" +
                 "photos=" + photos +
                 '}';
