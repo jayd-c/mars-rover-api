@@ -13,22 +13,26 @@
 <body>
 <div class="container">
     <h2>Welcome to the Mars Rover API web page</h2>
+    <div class="btn-group btn-group-lg m-2" role="group" aria-label="Basic mixed styles example">
+        <button type="button" class="btn btn-danger">Curiosity</button>
+        <button type="button" class="btn btn-warning">Opportunity</button>
+        <button type="button" class="btn btn-success">Spirit</button>
+    </div>
 <!--    <p th:text="${roverData}"></p>-->
 <!--    <img th:each="photo : ${roverData.photos}" th:src="${photo.imgSrc}">-->
- th:if=${index+1 < roverData.photos.size()}
     <div class="container">
         <div th:each="index: ${#numbers.sequence(0,roverData.photos.size(),4)}" class="row">
             <div class="col-sm">
-                <img th:src="${roverData.photos[index].imgSrc}" class="img-fluid mb-5" alt="...">
+                <img th:src="${roverData.photos[index].imgSrc}" class="img-fluid mb-4" alt="...">
             </div>
-            <div class="col-sm" th:if="${index+1 < roverData.photos.size()}">
-                <img th:src="${roverData.photos[index+1].imgSrc}" class="img-fluid mb-5" alt="...">
+            <div class="col-sm" th:if="${index+1 < roverData.photos.size()-1}">
+                <img th:src="${roverData.photos[index+1].imgSrc}" class="img-fluid mb-4" alt="...">
             </div>
-            <div class="col-sm" th:if="${index+2 < roverData.photos.size()}">
-                <img th:src="${roverData.photos[index+2].imgSrc}" class="img-fluid mb-5" alt="...">
+            <div class="col-sm" th:if="${index+2 < roverData.photos.size()-1}">
+                <img th:src="${roverData.photos[index+2].imgSrc}" class="img-fluid mb-4" alt="...">
             </div>
-            <div class="col-sm" th:if="${index+3 < roverData.photos.size()}">
-                <img th:src="${roverData.photos[index+3].imgSrc}" class="img-fluid mb-5" alt="...">
+            <div class="col-sm" th:if="${index+3 < roverData.photos.size()-1}">
+                <img th:src="${roverData.photos[index+3].imgSrc}" class="img-fluid mb-4" alt="...">
             </div>
         </div>
     </div>
