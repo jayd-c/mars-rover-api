@@ -20,27 +20,27 @@
             <button type="button" class="btn btn-secondary" id="marsApiopportunity">Opportunity</button>
             <button type="button" class="btn btn-secondary" id="marsApispirit">Spirit</button>
         </div>
-    </form>
 <!--    <p th:text="${roverData}"></p>-->
 <!--    <img th:each="photo : ${roverData.photos}" th:src="${photo.imgSrc}">-->
 <!--input for mars sol (marsian day)-->
-    <form class="row gy-2 gx-3 align-items-center">
-        <div class="col-auto">
-            <label class="col-form-label col-form-label-lg" for="marsSol"><h5>Mars Sol (a.k.a Mars Day)</h5></label>
-            <input type="number" class="form-control" id="marsSol" name="marsSol" placeholder="Mars sol..." min="0"  value="1">
-        </div>
-        <div class="col-auto">
-        </div>
-        <div class="col-auto">
-        </div>
-        <div class="col-auto">
-        </div>
-        <div class="col-auto mt-5">
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>
+       <div class="row gy-2 gx-3 align-items-center mb-2">
+           <div class="col-auto">
+               <label class="col-form-label col-form-label-lg" for="marsSol"><h5>Mars Sol (a.k.a Mars Day)</h5></label>
+               <input type="number" class="form-control" id="marsSol" name="marsSol" min="0"  value="1">
+           </div>
+           <div class="col-auto">
+           </div>
+           <div class="col-auto">
+           </div>
+           <div class="col-auto">
+           </div>
+           <div class="col-auto mt-5">
+               <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+           </div>
+       </div>
     </form>
     <div class="container">
-        <h2 th:text="${roverData.photos[0].earthDate}"></h2>
+<!--        <h2 th:text="${roverData.photos[0].earthDate}"></h2>-->
         <div th:each="index: ${#numbers.sequence(0,roverData.photos.size(),4)}" class="row">
             <div class="col-sm" th:if="${index < roverData.photos.size()-1}">
                 <img th:src="${roverData.photos[index].imgSrc}" class="img-fluid mb-4" alt="...">

@@ -9,25 +9,26 @@ const buttons = document.querySelectorAll("button[id*='marsApi']")
 
     }));
 
-    const queryString = window.location.search;
-    console.log(queryString);
-    // ?product=shirt&color=blue&newuser&size=m
-    // We can then parse the query string’s parameters using URLSearchParams:
+  function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  };
 
-    const urlParams = new URLSearchParams(queryString);
-    // Then we call any of its methods on the result.
+    let marsRoverType = getUrlParameter('marsApiRoverData')
+    console.log('mars rover type = '  + marsRoverType)
+    highlightBtnByRoverType(marsRoverType)
 
-    // For example, URLSearchParams.get() will return the first value associated with the given search parameter:
+    let marsSol = getUrlParameter('marsSol');
+    console.log("mars sol = " + marsSol)
 
-    let marsRoverType = urlParams.get('marsApiRoverData');
+    document.getElementById('marsSol').value = marsSol;
 
-    highlightBtnByRoverType(marsRoverType);
 
     function highlightBtnByRoverType (roverType) {
-        if(roverType == '') {
-            document.getElementById('marsApiopportunity').classList.remove('btn-secondary');
-            document.getElementById('marsApiopportunity').classList.add('btn-primary');
-        } else {
+        if(roverType == '')
+            roverType = 'opportunity';
              document.getElementById('marsApi'+roverType).classList.remove('btn-secondary');
-             document.getElementById('marsApi'+roverType).classList.add('btn-primary');}
+             document.getElementById('marsApi'+roverType).classList.add('btn-primary');
         }
