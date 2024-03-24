@@ -14,7 +14,7 @@
 <div class="container">
     <h2>Welcome to the Mars Rover API web page</h2>
     <form method="get" action="" id="frmRoverType">
-        <input type="hidden" id="marsApiRoverData" name="marsApiRoverData" value=""/>
+        <input type="hidden" th:field="${homeDto.marsApiRoverData}"/>
         <div class="btn-group btn-group-lg m-3" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-secondary" id="marsApicuriosity">Curiosity</button>
             <button type="button" class="btn btn-secondary" id="marsApiopportunity">Opportunity</button>
@@ -25,14 +25,18 @@
 <!--input for mars sol (marsian day)-->
        <div class="row gy-2 gx-3 align-items-center mb-2">
            <div class="col-auto">
-               <label class="col-form-label col-form-label-lg" for="marsSol"><h5>Mars Sol (a.k.a Mars Day)</h5></label>
-               <input type="number" class="form-control" id="marsSol" name="marsSol" min="0"  value="1">
+               <label class="col-form-label col-form-label-lg" ><h5>Mars Sol (a.k.a Mars Day)</h5></label>
+               <input type="number" class="form-control"th:field="${homeDto.marsSol}" min="0">
            </div>
            <div class="col-auto">
            </div>
            <div class="col-auto">
-           </div>
-           <div class="col-auto">
+               <div class="form-check">
+                   <input class="form-check-input"  type="checkbox" th:field="${homeDto.flexCheckIndeterminate}">
+                   <label class="form-check-label" >
+                       Indeterminate checkbox
+                   </label>
+               </div>
            </div>
            <div class="col-auto mt-5">
                <button type="submit" class="btn btn-primary btn-lg">Submit</button>

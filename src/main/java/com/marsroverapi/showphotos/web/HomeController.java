@@ -1,5 +1,6 @@
 package com.marsroverapi.showphotos.web;
 
+import com.marsroverapi.showphotos.dto.HomeDto;
 import com.marsroverapi.showphotos.response.MarsRover;
 import com.marsroverapi.showphotos.response.MarsRoverApiResponse;
 import com.marsroverapi.showphotos.service.MarsRoverApiService;
@@ -26,19 +27,16 @@ public class HomeController {
     @Autowired
     private MarsRoverApiService roverService;
     @GetMapping("/")
-    public String getHomeView (ModelMap model,  @RequestParam(required = false) String marsApiRoverData,
-                               @RequestParam(required = false) Integer marsSol) {
-        if(StringUtils.isEmptyOrWhitespace(marsApiRoverData)) {
-            marsApiRoverData = "opportunity";
+    public String getHomeView (ModelMap model, HomeDto homeDto) {
+        if(StringUtils.isEmptyOrWhitespace(homeDto.getMarsApiRoverData())) {
+            homeDto.setMarsApiRoverData("opportunity");
         }
-        if(marsApiRoverData.isEmpty() || marsApiRoverData.isBlank()) {
-            marsApiRoverData = "opportunity";
+        if(homeDto.getMarsSol() == null) {
+            homeDto.setMarsSol(1);
         }
-        if(marsSol == null) {
-            marsSol = 1;
-        }
-        MarsRoverApiResponse roverData = roverService.getRoverData(marsApiRoverData,marsSol);
+        MarsRoverApiResponse roverData = roverService.getRoverData(homeDto.getMarsApiRoverData(), homeDto.getMarsSol());
         model.put("roverData",roverData);
+        model.put("homeDto",homeDto);
         return "index";
     }
 
