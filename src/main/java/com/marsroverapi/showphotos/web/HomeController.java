@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.thymeleaf.util.StringUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.rmi.ServerException;
 import java.util.Objects;
 
@@ -27,14 +28,14 @@ public class HomeController {
     @Autowired
     private MarsRoverApiService roverService;
     @GetMapping("/")
-    public String getHomeView (ModelMap model, HomeDto homeDto) {
+    public String getHomeView (ModelMap model, HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         if(StringUtils.isEmptyOrWhitespace(homeDto.getMarsApiRoverData())) {
             homeDto.setMarsApiRoverData("opportunity");
         }
         if(homeDto.getMarsSol() == null) {
             homeDto.setMarsSol(1);
         }
-        MarsRoverApiResponse roverData = roverService.getRoverData(homeDto.getMarsApiRoverData(), homeDto.getMarsSol());
+        MarsRoverApiResponse roverData = roverService.getRoverData(homeDto);
         model.put("roverData",roverData);
         model.put("homeDto",homeDto);
         return "index";

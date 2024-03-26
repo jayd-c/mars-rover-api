@@ -3,7 +3,15 @@ package com.marsroverapi.showphotos.dto;
 public class HomeDto {
     private String marsApiRoverData;
     private Integer marsSol;
-    private Boolean flexCheckIndeterminate;
+    private Boolean cameraFhaz;//FHAZ
+    private Boolean cameraRhaz;//RHAZ
+    private Boolean cameraMast;//MAST
+    private Boolean cameraChemcam;//CHEMCAM
+    private Boolean cameraMahli;//MAHLI
+    private Boolean cameraMardi; //MARDI
+    private Boolean cameraNavcam;//NAVCAM
+    private Boolean cameraPancam;//PANCAM
+    private Boolean cameraMinites;//MINITES
 
     public String getMarsApiRoverData() {
         return marsApiRoverData;
@@ -21,11 +29,75 @@ public class HomeDto {
         this.marsSol = marsSol;
     }
 
-    public Boolean getFlexCheckIndeterminate() {
-        return flexCheckIndeterminate;
+    public Boolean getCameraFhaz() {
+        return cameraFhaz;
     }
 
-    public void setFlexCheckIndeterminate(Boolean flexCheckIndeterminate) {
-        this.flexCheckIndeterminate = flexCheckIndeterminate;
+    public void setCameraFhaz(Boolean cameraFhaz) {
+        this.cameraFhaz = cameraFhaz;
+    }
+
+    public Boolean getCameraRhaz() {
+        return cameraRhaz;
+    }
+
+    public void setCameraRhaz(Boolean cameraRhaz) {
+        this.cameraRhaz = cameraRhaz;
+    }
+
+    public Boolean getCameraMast() {
+        return cameraMast;
+    }
+
+    public void setCameraMast(Boolean cameraMast) {
+        this.cameraMast = cameraMast;
+    }
+
+    public Boolean getCameraChemcam() {
+        return cameraChemcam;
+    }
+
+    public void setCameraChemcam(Boolean cameraChemcam) {
+        this.cameraChemcam = cameraChemcam;
+    }
+
+    public Boolean getCameraMahli() {
+        return cameraMahli;
+    }
+
+    public void setCameraMahli(Boolean cameraMahli) {
+        this.cameraMahli = cameraMahli;
+    }
+
+    public Boolean getCameraMardi() {
+        return cameraMardi;
+    }
+
+    public void setCameraMardi(Boolean cameraMardi) {
+        this.cameraMardi = cameraMardi;
+    }
+
+    public Boolean getCameraNavcam() {
+        return cameraNavcam;
+    }
+
+    public void setCameraNavcam(Boolean cameraNavcam) {
+        this.cameraNavcam = cameraNavcam;
+    }
+
+    public Boolean getCameraPancam() {
+        return cameraPancam;
+    }
+
+    public void setCameraPancam(Boolean cameraPancam) {
+        this.cameraPancam = cameraPancam;
+    }
+
+    public Boolean getCameraMinites() {
+        return cameraMinites;
+    }
+
+    public void setCameraMinites(Boolean cameraMinites) {
+        this.cameraMinites = cameraMinites;
     }
 }

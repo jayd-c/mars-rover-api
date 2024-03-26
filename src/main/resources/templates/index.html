@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Welcome to the Mars Rover API web page</h2>
+    <h2 class="text-align-center">Welcome to the Mars Rover API web page</h2>
     <form method="get" action="" id="frmRoverType">
         <input type="hidden" th:field="${homeDto.marsApiRoverData}"/>
         <div class="btn-group btn-group-lg m-3" role="group" aria-label="Basic mixed styles example">
@@ -24,21 +24,85 @@
 <!--    <img th:each="photo : ${roverData.photos}" th:src="${photo.imgSrc}">-->
 <!--input for mars sol (marsian day)-->
        <div class="row gy-2 gx-3 align-items-center mb-2">
-           <div class="col-auto">
+           <div class="col-lg-4 col-md-4 col-sm-12">
                <label class="col-form-label col-form-label-lg" ><h5>Mars Sol (a.k.a Mars Day)</h5></label>
                <input type="number" class="form-control"th:field="${homeDto.marsSol}" min="0">
            </div>
-           <div class="col-auto">
-           </div>
-           <div class="col-auto">
+           <div class="col-auto col-md-4">
                <div class="form-check">
-                   <input class="form-check-input"  type="checkbox" th:field="${homeDto.flexCheckIndeterminate}">
-                   <label class="form-check-label" >
-                       Indeterminate checkbox
+                   <input class="form-check-input"  type="checkbox" th:field="${homeDto.cameraFhaz}">
+                   <label class="form-check-label">
+                       Front Hazard Avoidance Camera
+                   </label>
+               </div>
+               <div class="form-check">
+                   <input class="form-check-input" id="cameraRhaz1" type="checkbox" th:field="${homeDto.cameraRhaz}">
+                   <label class="form-check-label" for="cameraRhaz1" >
+                       Rear Hazard Avoidance Camera
+                   </label>
+               </div>
+               <div class="form-check">
+                   <input class="form-check-input" id="cameraMast1" type="checkbox" th:field="${homeDto.cameraMast}">
+                   <label class="form-check-label"  for="cameraMast1">
+                       Mast Camera
                    </label>
                </div>
            </div>
-           <div class="col-auto mt-5">
+           <div class="col-auto col-md-4">
+
+               <div class="form-check">
+                   <input class="form-check-input" id="cameraChemcam1" type="checkbox" th:field="${homeDto.cameraChemcam}">
+                   <label class="form-check-label" for="cameraChemcam1">
+                       Chemistry and Camera Complex
+                   </label>
+               </div>
+               <div class="form-check">
+                   <input class="form-check-input" id="cameraMahli1" type="checkbox" th:field="${homeDto.cameraMahli}">
+                   <label class="form-check-label" for="cameraMahli1">
+                       Mars Hand Lens Imager
+                   </label>
+               </div>
+               <div class="form-check">
+                   <input class="form-check-input" id="cameraMardi1" type="checkbox" th:field="${homeDto.cameraMardi}">
+                   <label class="form-check-label" for="cameraMardi1" >
+                       Mars Descent Imager
+                   </label>
+               </div>
+
+<!--               <div class="form-check">-->
+<!--                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">-->
+<!--                   <label class="form-check-label" for="flexRadioDefault1">-->
+<!--                       Default radio-->
+<!--                   </label>-->
+<!--               </div>-->
+<!--               <div class="form-check">-->
+<!--                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>-->
+<!--                   <label class="form-check-label" for="flexRadioDefault2">-->
+<!--                       Default checked radio-->
+<!--                   </label>-->
+<!--               </div>-->
+           </div>
+           <div class="col-auto">
+               <div class="form-check">
+                   <input class="form-check-input" id="cameraNavcam1"  type="checkbox" th:field="${homeDto.cameraNavcam}">
+                   <label class="form-check-label" for="cameraNavcam1">
+                       Navigation Camera
+                   </label>
+               </div>
+               <div class="form-check">
+                   <input class="form-check-input" id="cameraPancam1" type="checkbox" th:field="${homeDto.cameraPancam}">
+                   <label class="form-check-label" for="cameraPancam1">
+                       Panoramic Camera
+                   </label>
+               </div>
+               <div class="form-check">
+                   <input class="form-check-input" id="cameraMinites1"  type="checkbox" th:field="${homeDto.cameraMinites}">
+                   <label class="form-check-label" for="cameraMinites1">
+                       Miniature Thermal Emission Spectrometer
+                   </label>
+               </div>
+           </div>
+           <div class="mt-5">
                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
            </div>
        </div>
