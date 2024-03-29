@@ -27,8 +27,10 @@ const buttons = document.querySelectorAll("button[id*='marsApi']")
 
 
     function highlightBtnByRoverType (roverType) {
-        if(roverType == '')
-            roverType = 'opportunity';
-             document.getElementById('marsApi'+roverType).classList.remove('btn-secondary');
-             document.getElementById('marsApi'+roverType).classList.add('btn-primary');
+        if(roverType == '') roverType = 'opportunity';
+        else{
+                document.getElementById('marsApi'+roverType).classList.remove('btn-secondary');
+                document.getElementById('marsApi'+roverType).classList.add('btn-primary');
+            }
+
         }
