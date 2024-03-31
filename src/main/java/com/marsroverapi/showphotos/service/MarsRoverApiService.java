@@ -8,62 +8,60 @@ import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MarsRoverApiService {
 
     private static final String  API_KEY = "gsnjNeLcmPeGm0bKGfQHjiEaqUnKQwA5ZigzJKJL";
+    private Map<String, List<String>> validCameras = new HashMap<>();
 
-    private final Map<String,List<String>> validCameras = new HashMap<>();
+    public MarsRoverApiService () {
+        validCameras.put("Opportunity", Arrays.asList("FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES"));
+        validCameras.put("Curiosity", Arrays.asList("FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM"));
+        validCameras.put("Spirit", Arrays.asList("FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES"));
+    }
 
-    public MarsRoverApiService() {
-        validCameras.put("Curiosity",List.of("FHAZ","RHAZ","MAST","CHEMCAM","MAHLI","MARDI","NAVCAM"));
-        validCameras.put("Opportunity",List.of("FHAZ","RHAZ","NAVCAM","PANCAM","MINITES"));
-        validCameras.put("Spirit",List.of("FHAZ","RHAZ","NAVCAM","PANCAM","MINITES"));
+    public MarsRoverApiResponse getRoverData(HomeDto homeDto) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        RestTemplate rt = new RestTemplate();
+
+        List<String> apiUrlEnpoints = getApiUrlEnpoints(homeDto);
+        List<MarsPhoto> photos = new ArrayList<>();
+        MarsRoverApiResponse response = new MarsRoverApiResponse();
+
+        apiUrlEnpoints.stream()
+                .forEach(url -> {
+                    MarsRoverApiResponse apiResponse = rt.getForObject(url, MarsRoverApiResponse.class);
+                    photos.addAll(apiResponse.getPhotos());
+                });
+
+        response.setPhotos(photos);
+
+        return response;
+    }
+
+    public List<String> getApiUrlEnpoints (HomeDto homeDto) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        List<String> urls = new ArrayList<>();
+
+        Method[] methods = homeDto.getClass().getMethods();
+
+        // This code will grab all getCamera* methods and (if value returns true) then we will build a API URL to
+        //  call in order to fetch pictures for a given rover / camera / sol.
+        for (Method method : methods) {
+            if (method.getName().indexOf("getCamera") > -1 && Boolean.TRUE.equals(method.invoke(homeDto))) {
+                String cameraName = method.getName().split("getCamera")[1].toUpperCase();
+                if (validCameras.get(homeDto.getMarsApiRoverData()).contains(cameraName)) {
+                    urls.add("https://api.nasa.gov/mars-photos/api/v1/rovers/"+homeDto.getMarsApiRoverData()+"/photos?sol="+homeDto.getMarsSol()+"&api_key=" + API_KEY + "&camera=" + cameraName);
+                }
+            }
+        }
+
+        return urls;
     }
 
     public Map<String, List<String>> getValidCameras() {
         return validCameras;
     }
-
-    public MarsRoverApiResponse getRoverData (HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
-        RestTemplate rt = new RestTemplate();
-
-        List<String> apiUrlEndpoints = getApiUrlEndpoints(homeDto);
-        List<MarsPhoto> photos = new ArrayList<>();
-
-        MarsRoverApiResponse response = new MarsRoverApiResponse();
-
-        apiUrlEndpoints.forEach(url -> {
-            MarsRoverApiResponse apiResponse = rt.getForObject(url,MarsRoverApiResponse.class);
-            assert apiResponse != null;
-            photos.addAll(apiResponse.getPhotos());
-        });
-        response.setPhotos(photos);
-        return response;
-    }
-
-    public List<String> getApiUrlEndpoints (HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
-        List<String> urls = new ArrayList<>();
-
-        // This code will grab all getCamera* methods, and (if value returns true) then we will build an API URL to
-        //  call in order to fetch pictures for a given rover / camera / sol.
-
-        Method[] methods = homeDto.getClass().getMethods();
-        for(Method method: methods) {
-            if(method.getName().contains("getCamera") && Boolean.TRUE.equals(method.invoke(homeDto))) {
-//                String cameraName = method.getName().substring(9).toUpperCase();
-                String cameraName = method.getName().split("getCamera")[1].toUpperCase(); // *** code from Trevor Page
-
-                if(validCameras.get(homeDto.getMarsApiRoverData()).contains(cameraName)) {
-                    urls.add("https://api.nasa.gov/mars-photos/api/v1/rovers/" + homeDto.getMarsApiRoverData() + "/photos?sol="+homeDto.getMarsSol()+"&camera="+cameraName+"&api_key=" + API_KEY);
-                }
-            }
-        }
-        return urls;
-    }
 }
+
+

@@ -12,15 +12,6 @@ public class MarsRover {
     @JsonProperty("launch_date")
     private String launchDate;
 
-//    "name": "Curiosity",
-//            "landing_date": "2012-08-06",
-//            "launch_date": "2011-11-26",
-//            "status": "active",
-//            "max_sol": 4102,
-//            "max_date": "2024-02-19",
-//            "total_photos": 695670,
-//            "cameras": [
-
 
     public Long getId() {
         return id;
