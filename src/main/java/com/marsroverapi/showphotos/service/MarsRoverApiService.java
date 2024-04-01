@@ -1,8 +1,10 @@
 package com.marsroverapi.showphotos.service;
 
 import com.marsroverapi.showphotos.dto.HomeDto;
+import com.marsroverapi.showphotos.repository.PreferencesRepository;
 import com.marsroverapi.showphotos.response.MarsPhoto;
 import com.marsroverapi.showphotos.response.MarsRoverApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,7 +16,10 @@ import java.util.*;
 public class MarsRoverApiService {
 
     private static final String  API_KEY = "gsnjNeLcmPeGm0bKGfQHjiEaqUnKQwA5ZigzJKJL";
-    private Map<String, List<String>> validCameras = new HashMap<>();
+    private final Map<String, List<String>> validCameras = new HashMap<>();
+    @Autowired
+    private PreferencesRepository preferencesRepo;
+
 
     public MarsRoverApiService () {
         validCameras.put("Opportunity", Arrays.asList("FHAZ", "RHAZ", "NAVCAM", "PANCAM", "MINITES"));
@@ -29,9 +34,10 @@ public class MarsRoverApiService {
         List<MarsPhoto> photos = new ArrayList<>();
         MarsRoverApiResponse response = new MarsRoverApiResponse();
 
-        apiUrlEnpoints.stream()
+        apiUrlEnpoints
                 .forEach(url -> {
                     MarsRoverApiResponse apiResponse = rt.getForObject(url, MarsRoverApiResponse.class);
+                    assert apiResponse != null;
                     photos.addAll(apiResponse.getPhotos());
                 });
 
@@ -50,6 +56,7 @@ public class MarsRoverApiService {
         for (Method method : methods) {
             if (method.getName().indexOf("getCamera") > -1 && Boolean.TRUE.equals(method.invoke(homeDto))) {
                 String cameraName = method.getName().split("getCamera")[1].toUpperCase();
+                System.out.println("Camera name = " + cameraName);
                 if (validCameras.get(homeDto.getMarsApiRoverData()).contains(cameraName)) {
                     urls.add("https://api.nasa.gov/mars-photos/api/v1/rovers/"+homeDto.getMarsApiRoverData()+"/photos?sol="+homeDto.getMarsSol()+"&api_key=" + API_KEY + "&camera=" + cameraName);
                 }
@@ -61,6 +68,10 @@ public class MarsRoverApiService {
 
     public Map<String, List<String>> getValidCameras() {
         return validCameras;
+    }
+
+    public void save(HomeDto homeDto) {
+        preferencesRepo.save(homeDto);
     }
 }
 

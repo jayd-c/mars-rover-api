@@ -1,6 +1,7 @@
 package com.marsroverapi.showphotos.web;
 
 import com.marsroverapi.showphotos.dto.HomeDto;
+import com.marsroverapi.showphotos.repository.PreferencesRepository;
 import com.marsroverapi.showphotos.response.MarsRoverApiResponse;
 import com.marsroverapi.showphotos.service.MarsRoverApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,13 @@ public class HomeController {
         MarsRoverApiResponse roverData = roverService.getRoverData(homeDto);
         model.put("roverData",roverData);
         model.put("homeDto",homeDto);
-        model.put("validCameras",roverService.getValidCameras());
+        model.put("validCameras",roverService.getValidCameras().get(homeDto.getMarsApiRoverData()));
         return "index";
     }
 
     @PostMapping("/")
     public String postHomeView (HomeDto homeDto) {
+        roverService.save(homeDto);
         System.out.println(homeDto);
         return "redirect:/";
     }

@@ -9,7 +9,6 @@ public class HomeDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
-    @Column(length = 20)
     private String marsApiRoverData;
     private Integer marsSol;
     private Boolean cameraFhaz;
